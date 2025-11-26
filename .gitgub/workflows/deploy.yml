@@ -4,12 +4,6 @@ env:
 
 on:
   push:
-    paths:
-        -main
-#      - ".github/workflows/**"
-#      - "src/**"
-#      - "build.gradle.kts"
-#      - "Dockerfile"
     branches:
       - main
 
