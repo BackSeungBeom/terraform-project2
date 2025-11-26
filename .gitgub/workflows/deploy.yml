@@ -51,7 +51,7 @@ jobs:
         env:
           ACTIONS_STEP_DEBUG: true
           APPLICATION_SECRET: ${{ secrets.APPLICATION_SECRET }}
-        run: echo "$APPLICATION_SECRET" > back/src/main/resources/application-secret.yml
+        run: echo "$APPLICATION_SECRET" > /src/main/resources/application-secret.yml
       - name: Docker Buildx 설치
         uses: docker/setup-buildx-action@v2
       - name: 레지스트리 로그인
@@ -74,7 +74,7 @@ jobs:
       - name: 빌드 앤 푸시
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./back
           push: true
           tags: |
             ghcr.io/${{ steps.export_owner.outputs.owner_lc }}/${{ steps.export_image.outputs.image_name }}:${{ needs.makeTagAndRelease.outputs.tag_name }},
@@ -92,7 +92,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           instance-ids: "i-02676f0682168bc65"
-          working-directory: /
+          working-directory: ./back
           comment: Deploy
           command: |
             docker pull ghcr.io/${{ needs.buildImageAndPush.outputs.owner_lc }}/${{ needs.buildImageAndPush.outputs.image_name }}:latest && \
