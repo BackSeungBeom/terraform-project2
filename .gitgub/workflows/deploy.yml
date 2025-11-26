@@ -5,8 +5,8 @@ env:
 on:
   push:
     paths:
-      - ".github/workflows/**"
-      - "back/**"
+        -main
+#      - ".github/workflows/**"
 #      - "src/**"
 #      - "build.gradle.kts"
 #      - "Dockerfile"
